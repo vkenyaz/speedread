@@ -30,7 +30,8 @@ use strict;
 use autodie;
 use v5.14;
 
-my $wpm = 250;
+my $dwpm = 400;
+my $wpm = 400;
 my $resume = 0;
 my $multiword = 0;
 
@@ -99,7 +100,7 @@ sub find_ORP {
 
 sub show_guide {
 	# Top visual guide
-	say(" "x$ORPvisualpos . color('red') . "v" . color('reset') . "\033[K");
+	say(" "x$ORPvisualpos . color('blue') . "v" . color('reset') . "\033[K");
 }
 
 sub show_word {
@@ -112,7 +113,7 @@ sub show_word {
 		. " " x ($ORPvisualpos - $i)
 		. color("bold")
 		. substr($word, 0, $i)
-		. color("red")
+		. color("blue")
 		. $pivotch
 		. color("reset")
 		. color("bold")
@@ -166,6 +167,9 @@ sub process_keys {
 
 		} elsif ($ch eq ']') {
 			$wpm = int($wpm * 1.1);
+
+		} elsif ($ch eq '=') {
+			$wpm = $dwpm;
 
 		} elsif ($ch eq ' ') {
 			$paused = not $paused;
